@@ -1,0 +1,11 @@
+#+OPTIONS: ^:nil
+* Simple tests
+  :PROPERTIES:
+  :ID:       5947c402da07c7aca0000001
+  :END:
+#+source: basic
+#+BEGIN_SRC rust :results silent
+fn main() {
+    println!("hello,ob-rust")
+}
+#+END_SRC
