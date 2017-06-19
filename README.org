@@ -45,7 +45,7 @@
   : chào bạn : Bạn có thể edit và run code trực tiếp!
   : 您好 : 这段代码是可以编辑并且能够运行的！
 
-* Prerequisited
+* Required
 
 ** rust and cargo
 
@@ -62,3 +62,7 @@ You can install cargo-script using Cargo's install subcommand:
 #+BEGIN_SRC sh
 cargo install cargo-script
 #+END_SRC
+
+* TODOs
+
++ replace =cargo script= with =rustc= and run binary.
