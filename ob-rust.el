@@ -3,9 +3,12 @@
 ;; Copyright (C) 2017 Mican Zhang
 
 ;; Author: Mican Zhang
-;; Keywords: rust
+;; Maintainer: Mican Zhang
+;; Created: 19 June 2017
+;; Keywords: rust, languages, org, babel
+;; Package-Version: 20170619.224
 ;; Homepage: http://orgmode.org
-;; Version: 0.02
+;; Version: 0.0.1
 
 ;;; License:
 
@@ -28,10 +31,10 @@
 
 ;; Org-Babel support for evaluating rust code.
 ;;
-;; Much of this is modeled after `ob-C'. Just like the `ob-C', you can specify
-;; :flags headers when compiling with the "rust run" command. Unlike `ob-C', you
+;; Much of this is modeled after `ob-C'.  Just like the `ob-C', you can specify
+;; :flags headers when compiling with the "rust run" command.  Unlike `ob-C', you
 ;; can also specify :args which can be a list of arguments to pass to the
-;; binary. If you quote the value passed into the list, it will use `ob-ref'
+;; binary.  If you quote the value passed into the list, it will use `ob-ref'
 ;; to find the reference data.
 ;;
 ;; If you do not include a main function or a package name, `ob-rust' will
@@ -46,7 +49,7 @@
 ;;   rust command.
 ;;
 ;; - `rust-mode' is also recommended for syntax highlighting and
-;;   formatting. Not this particularly needs it, it just assumes you
+;;   formatting.  Not this particularly needs it, it just assumes you
 ;;   have it.
 
 ;;; TODO:
@@ -63,15 +66,9 @@
 
 (defvar org-babel-default-header-args:rust '())
 
-(defvar org-babel-rust-command "cargo"
-  "The rust command to use to compile and run the rust code.")
-
-(defmacro org-babel-rust-as-list (val)
-  (list 'if (list 'listp val) val (list 'list val)))
-
 (defun org-babel-execute:rust (body params)
-  "Execute a block of Template code with org-babel. This function is
-called by `org-babel-execute-src-block'"
+  "Execute a block of Template code with org-babel.
+This function is called by `org-babel-execute-src-block'."
   (message "executing Rust source code block")
   (let* ((tmp-src-file (org-babel-temp-file "rust-src-" ".rs"))
          (processed-params (org-babel-process-params params))
@@ -79,7 +76,7 @@ called by `org-babel-execute-src-block'"
          (args (cdr (assoc :args processed-params)))
          (coding-system-for-read 'utf-8) ;; use utf-8 with subprocesses
          (coding-system-for-write 'utf-8))
-    (with-temp-file tmp-src-file (insert body)) 
+    (with-temp-file tmp-src-file (insert body))
     (if-let ((results
 	      (org-babel-eval
 	       (format "cargo script %s" tmp-src-file)
@@ -100,7 +97,7 @@ called by `org-babel-execute-src-block'"
 ;; the context of the session environment.
 (defun org-babel-prep-session:rust (session params)
   "This function does nothing as Rust is a compiled language with no
-support for sessions"
+support for sessions."
   (error "Rust is a compiled languages -- no support for sessions"))
 
 (defun org-babel-rust-rustfmt (body)
