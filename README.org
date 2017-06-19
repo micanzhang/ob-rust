@@ -1,4 +1,4 @@
-#+TITLE: Readme
+#+TITLE: Readme [[https://travis-ci.org/micanzhang/ob-rust.svg?branch=master][build status]]
 
 * Introduction
 
