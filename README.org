@@ -1,0 +1,64 @@
+#+TITLE: Readme
+
+* Introduction
+
+  =ob-rust= enables [[http://orgmode.org/worg/org-contrib/babel/intro.html][Org-Babel]] support for evaluating [[https://www.rust-lang.org/][rust]] code. It was
+  created based on the usage of [[http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-C.html][ob-C]] and [[https://github.com/pope/ob-go][ob-go]].
+
+  : #+begin_src rust
+  : fn main() {
+  :     let greetings = ["Hello", "Hola", "Bonjour",
+  :                      "Ciao", "こんにちは", "안녕하세요",
+  :                      "Cześć", "Olá", "Здравствуйте",
+  :                      "chào bạn", "您好"];
+  : 
+  :     for (num, greeting) in greetings.iter().enumerate() {
+  :         print!("{} : ", greeting);
+  :         match num {
+  :             0 =>  println!("This code is editable and runnable!"),
+  :             1 =>  println!("Este código es editable y ejecutable!"),
+  :             2 =>  println!("Ce code est modifiable et exécutable!"),
+  :             3 =>  println!("Questo codice è modificabile ed eseguibile!"),
+  :             4 =>  println!("このコードは編集して実行出来ます！"),
+  :             5 =>  println!("여기에서 코드를 수정하고 실행할 수 있습니다!"),
+  :             6 =>  println!("Ten kod można edytować oraz uruchomić!"),
+  :             7 =>  println!("Esse código é editável e executável!"),
+  :             8 =>  println!("Этот код можно отредактировать и запустить!"),
+  :             9 =>  println!("Bạn có thể edit và run code trực tiếp!"),
+  :             10 =>  println!("这段代码是可以编辑并且能够运行的！"),
+  :             _ =>  {},
+  :         }
+  :     }
+  : }
+  : #+end_src
+  :
+  : #+resutls:
+  : Hello : This code is editable and runnable!
+  : Hola : Este código es editable y ejecutable!
+  : Bonjour : Ce code est modifiable et exécutable!
+  : Ciao : Questo codice è modificabile ed eseguibile!
+  : こんにちは : このコードは編集して実行出来ます！
+  : 안녕하세요 : 여기에서 코드를 수정하고 실행할 수 있습니다!
+  : Cześć : Ten kod można edytować oraz uruchomić!
+  : Olá : Esse código é editável e executável!
+  : Здравствуйте : Этот код можно отредактировать и запустить!
+  : chào bạn : Bạn có thể edit và run code trực tiếp!
+  : 您好 : 这段代码是可以编辑并且能够运行的！
+
+* Prerequisited
+
+** rust and cargo
+
+To install rust, run the following in your terminal:
+#+BEGIN_SRC sh
+curl https://sh.rustup.rs -sSf | sh
+#+END_SRC
+
+for more details or other methods installation, please visit: [[https://www.rust-lang.org/en-US/install.html][https://www.rust-lang.org/en-US/install.html]]
+
+** cargo script
+
+You can install cargo-script using Cargo's install subcommand:
+#+BEGIN_SRC sh
+cargo install cargo-script
+#+END_SRC
