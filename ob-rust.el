@@ -1,4 +1,4 @@
-;;; ob-rust.el --- org-babel functions for rust evaluation
+;;; ob-rust.el --- Org-babel functions for Rust  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017 Mican Zhang
 
@@ -73,8 +73,8 @@ This function is called by `org-babel-execute-src-block'."
   (message "executing Rust source code block")
   (let* ((tmp-src-file (org-babel-temp-file "rust-src-" ".rs"))
          (processed-params (org-babel-process-params params))
-         (flags (cdr (assoc :flags processed-params)))
-         (args (cdr (assoc :args processed-params)))
+         (_flags (cdr (assoc :flags processed-params)))
+         (_args (cdr (assoc :args processed-params)))
          (coding-system-for-read 'utf-8) ;; use utf-8 with subprocesses
          (coding-system-for-write 'utf-8))
     (with-temp-file tmp-src-file (insert body))
@@ -97,7 +97,7 @@ This function is called by `org-babel-execute-src-block'."
 
 ;; This function should be used to assign any variables in params in
 ;; the context of the session environment.
-(defun org-babel-prep-session:rust (session params)
+(defun org-babel-prep-session:rust (_session _params)
   "This function does nothing as Rust is a compiled language with no
 support for sessions."
   (error "Rust is a compiled languages -- no support for sessions"))
