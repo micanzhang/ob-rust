@@ -1,4 +1,4 @@
-;;; ob-rust.el --- org-babel functions for rust evaluation
+;;; ob-rust.el --- Org-babel functions for Rust  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017 Mican Zhang
 
@@ -6,8 +6,7 @@
 ;; Maintainer: Mican Zhang
 ;; Created: 19 June 2017
 ;; Keywords: rust, languages, org, babel
-;; Package-Version: 20170619.224
-;; Homepage: http://orgmode.org
+;; Homepage: https://github.com/micanzhang/ob-rust
 ;; Version: 0.0.1
 
 ;;; License:
@@ -48,6 +47,8 @@
 ;; - You must have rust and cargo installed and the rust and cargo should be in your `exec-path'
 ;;   rust command.
 ;;
+;; - cargo-script
+;;
 ;; - `rust-mode' is also recommended for syntax highlighting and
 ;;   formatting.  Not this particularly needs it, it just assumes you
 ;;   have it.
@@ -72,45 +73,34 @@ This function is called by `org-babel-execute-src-block'."
   (message "executing Rust source code block")
   (let* ((tmp-src-file (org-babel-temp-file "rust-src-" ".rs"))
          (processed-params (org-babel-process-params params))
-         (flags (cdr (assoc :flags processed-params)))
-         (args (cdr (assoc :args processed-params)))
+         (_flags (cdr (assoc :flags processed-params)))
+         (_args (cdr (assoc :args processed-params)))
          (coding-system-for-read 'utf-8) ;; use utf-8 with subprocesses
          (coding-system-for-write 'utf-8))
     (with-temp-file tmp-src-file (insert body))
-    (if-let ((results
-	      (org-babel-eval
-	       (format "cargo script %s" tmp-src-file)
-               "")))
-	(org-babel-reassemble-table
-	 (if (or (member "table" (cdr (assoc :result-params processed-params)))
-		 (member "vector" (cdr (assoc :result-params processed-params))))
+    (let ((results
+	   (org-babel-eval
+	    (format "cargo script %s" tmp-src-file)
+            "")))
+      (when results
+        (org-babel-reassemble-table
+         (if (or (member "table" (cdr (assoc :result-params processed-params)))
+	         (member "vector" (cdr (assoc :result-params processed-params))))
 	     (let ((tmp-file (org-babel-temp-file "rust-")))
 	       (with-temp-file tmp-file (insert (org-babel-trim results)))
 	       (org-babel-import-elisp-from-file tmp-file))
 	   (org-babel-read (org-babel-trim results) t))
-	 (org-babel-pick-name
+         (org-babel-pick-name
 	  (cdr (assoc :colname-names params)) (cdr (assoc :colnames params)))
-	 (org-babel-pick-name
-	  (cdr (assoc :rowname-names params)) (cdr (assoc :rownames params)))))))
+         (org-babel-pick-name
+	  (cdr (assoc :rowname-names params)) (cdr (assoc :rownames params))))))))
 
 ;; This function should be used to assign any variables in params in
 ;; the context of the session environment.
-(defun org-babel-prep-session:rust (session params)
+(defun org-babel-prep-session:rust (_session _params)
   "This function does nothing as Rust is a compiled language with no
 support for sessions."
   (error "Rust is a compiled languages -- no support for sessions"))
-
-(defun org-babel-rust-rustfmt (body)
-  "Run rustfmt over the body. Why not?"
-  (with-temp-buffer
-    (let ((outbuf (current-buffer))
-          (coding-system-for-read 'utf-8) ;; use utf-8 with subprocesses
-          (coding-system-for-write 'utf-8))
-      (with-temp-buffer
-        (insert body)
-        (shell-command-on-region (point-min) (point-max) "rustfmt"
-                                 outbuf nil nil)))
-    (buffer-string)))
 
 (provide 'ob-rust)
 ;;; ob-rust.el ends here
