@@ -1,8 +1,8 @@
-#+TITLE: Readme [[https://travis-ci.org/micanzhang/ob-rust.svg?branch=master]]
+#+TITLE: ob-rust [[https://travis-ci.org/micanzhang/ob-rust][file:https://travis-ci.org/micanzhang/ob-rust.svg?branch=master]]
 
 * Introduction
 
-  =ob-rust= enables [[http://orgmode.org/worg/org-contrib/babel/intro.html][Org-Babel]] support for evaluating [[https://www.rust-lang.org/][rust]] code. It was
+  =ob-rust= enables [[http://orgmode.org/worg/org-contrib/babel/intro.html][Org-Babel]] support for evaluating [[https://www.rust-lang.org/][Rust]] code. It was
   created based on the usage of [[http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-C.html][ob-C]] and [[https://github.com/pope/ob-go][ob-go]].
 
   : #+begin_src rust
@@ -45,7 +45,7 @@
   : chào bạn : Bạn có thể edit và run code trực tiếp!
   : 您好 : 这段代码是可以编辑并且能够运行的！
 
-* Required
+* Requirements
 
 ** rust and cargo
 
@@ -58,7 +58,7 @@ for more details or other methods installation, please visit: [[https://www.rust
 
 ** cargo script
 
-You can install cargo-script using Cargo's install subcommand:
+You can install [[https://github.com/DanielKeep/cargo-script][cargo-script]] using Cargo's install subcommand:
 #+BEGIN_SRC sh
 cargo install cargo-script
 #+END_SRC
