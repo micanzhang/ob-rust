@@ -101,17 +101,5 @@ This function is called by `org-babel-execute-src-block'."
 support for sessions."
   (error "Rust is a compiled languages -- no support for sessions"))
 
-(defun org-babel-rust-rustfmt (body)
-  "Run rustfmt over the body. Why not?"
-  (with-temp-buffer
-    (let ((outbuf (current-buffer))
-          (coding-system-for-read 'utf-8) ;; use utf-8 with subprocesses
-          (coding-system-for-write 'utf-8))
-      (with-temp-buffer
-        (insert body)
-        (shell-command-on-region (point-min) (point-max) "rustfmt"
-                                 outbuf nil nil)))
-    (buffer-string)))
-
 (provide 'ob-rust)
 ;;; ob-rust.el ends here
