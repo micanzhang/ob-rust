@@ -6,8 +6,7 @@
 ;; Maintainer: Mican Zhang
 ;; Created: 19 June 2017
 ;; Keywords: rust, languages, org, babel
-;; Package-Version: 20170619.224
-;; Homepage: http://orgmode.org
+;; Homepage: https://github.com/micanzhang/ob-rust
 ;; Version: 0.0.1
 
 ;;; License:
