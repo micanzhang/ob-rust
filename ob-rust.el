@@ -56,7 +56,6 @@
 ;;; TODO:
 
 ;;; Code:
-(require 'org)
 (require 'ob)
 (require 'ob-eval)
 (require 'ob-ref)
