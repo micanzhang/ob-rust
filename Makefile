@@ -10,7 +10,5 @@ test:
 	              (setq org-confirm-babel-evaluate nil) \
 	              (org-babel-do-load-languages \
 	                'org-babel-load-languages '((emacs-lisp . t) \
-	                                            (sh . t) \
-	                                            (org . t) \
 	                                            (rust . t))))" \
 	    -f ob-rust-test-runall
