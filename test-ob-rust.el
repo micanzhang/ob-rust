@@ -64,7 +64,7 @@
   "Test the usage of string variables."
   (if (executable-find org-babel-rust-command)
       (org-test-at-id "5947c402da07c7aca0000001"
-		      (org-babel-next-src-block 6)
+		      (org-babel-next-src-block)
 		      (should (string-equal "hello,ob-rust" (org-babel-execute-src-block))))))
 
 (defun ob-rust-test-runall ()
