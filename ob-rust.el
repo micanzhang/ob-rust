@@ -62,6 +62,7 @@
 
 
 ;; optionally define a file extension for this language
+(defvar org-babel-tangle-lang-exts)
 (add-to-list 'org-babel-tangle-lang-exts '("rust" . "rs"))
 
 (defvar org-babel-default-header-args:rust '())
