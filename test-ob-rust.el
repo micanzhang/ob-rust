@@ -1,4 +1,4 @@
-;;; test-ob-go.el --- tests for ob-go.el
+;;; test-ob-rust.el --- tests for ob-rust.el
 
 ;; This file is not part of GNU Emacs.
 
@@ -17,7 +17,9 @@
 
 ;;; Code:
 (require 'ert)
+(require 'org)
 (require 'org-id)
+(require 'ob-rust)
 
 (defconst ob-rust-test-dir
   (expand-file-name (file-name-directory (or load-file-name buffer-file-name))))
@@ -53,23 +55,15 @@
 	 (kill-buffer to-be-removed)))))
 (def-edebug-spec org-test-at-id (form body))
 
-(unless (featurep 'ob-rust)
-  (signal 'missing-test-dependency "Support for Rust code blocks"))
-
 (ert-deftest ob-rust/assert ()
   (should t))
 
-
 (ert-deftest ob-rust/basic ()
   "Test the usage of string variables."
-  (if (executable-find org-babel-rust-command)
-      (org-test-at-id "5947c402da07c7aca0000001"
-		      (org-babel-next-src-block)
-		      (should (string-equal "hello,ob-rust" (org-babel-execute-src-block))))))
-
-(defun ob-rust-test-runall ()
-  (progn
+  (let (org-confirm-babel-evaluate)
     (ob-rust-test-update-id-locations)
-    (ert t)))
+    (org-test-at-id "5947c402da07c7aca0000001"
+      (org-babel-next-src-block)
+      (should (string-equal "hello,ob-rust" (org-babel-execute-src-block))))))
 
 (provide 'ob-rust-test)
