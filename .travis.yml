@@ -1,3 +1,7 @@
+
+language: rust
+cache: cargo
+
 env:
   matrix:
     - EMACS=emacs23
@@ -26,12 +30,17 @@ before_install:
       sudo apt-get -qq -f install &&
       sudo apt-get -qq install emacs-snapshot emacs-snapshot-el;
     fi
-
-before_script:
+  - if cargo install --list | grep '^cargo-script ' >/dev/null; then
+      true;
+    else
+      cargo install cargo-script;
+    fi
   - if [ "$EMACS" = "emacs23" ]; then
       curl 'http://orgmode.org/org-8.2.5h.tar.gz' \
           | tar xzf - --wildcards --strip-components=2 org-8.2.5h/lisp/*.el &&
       curl 'http://git.savannah.gnu.org/cgit/emacs.git/plain/lisp/emacs-lisp/ert.el?h=emacs-24.3' > ert.el;
     fi
+
+install: true
 
 script: make test
