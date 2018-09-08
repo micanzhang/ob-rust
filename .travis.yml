@@ -26,7 +26,6 @@ before_install:
       sudo apt-get -qq -f install &&
       sudo apt-get -qq install emacs25;
     fi
-    fi
   - if cargo install --list | grep '^cargo-script ' >/dev/null; then
       true;
     else
