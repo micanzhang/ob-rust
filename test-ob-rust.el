@@ -66,4 +66,12 @@
       (org-babel-next-src-block)
       (should (string-equal "hello,ob-rust" (org-babel-execute-src-block))))))
 
+(ert-deftest ob-rust/wrap-main ()
+  "Test wrapping Rust code block in main function."
+  (let (org-confirm-babel-evaluate)
+    (ob-rust-test-update-id-locations)
+    (org-test-at-id "5947c402da07c7aca0000002"
+      (org-babel-next-src-block)
+      (should (string-equal "hello,ob-rust" (org-babel-execute-src-block))))))
+
 (provide 'ob-rust-test)
