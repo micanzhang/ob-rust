@@ -9,3 +9,12 @@ fn main() {
     println!("hello,ob-rust")
 }
 #+END_SRC
+
+* Wrapping main
+  :PROPERTIES:
+  :ID:       5947c402da07c7aca0000002
+  :END:
+#+source: basic
+#+BEGIN_SRC rust :results silent
+println!("hello,ob-rust")
+#+END_SRC
