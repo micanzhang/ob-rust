@@ -58,11 +58,11 @@ for more details or other methods installation, please visit: [[https://www.rust
 
 ** cargo script
 
-You can install [[https://github.com/DanielKeep/cargo-script][cargo-script]] using Cargo's install subcommand:
+You can install [[https://github.com/fornwall/rust-script][rust-script]] using Cargo's install subcommand:
 #+BEGIN_SRC sh
-cargo install cargo-script
+cargo install rust-script
 #+END_SRC
 
 * TODOs
 
-+ replace =cargo script= with =rustc= and run binary.
++ replace =rust-script= with =rustc= and run binary.

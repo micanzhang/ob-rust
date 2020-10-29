@@ -26,10 +26,10 @@ before_install:
       sudo apt-get -qq -f install &&
       sudo apt-get -qq install emacs25;
     fi
-  - if cargo install --list | grep '^cargo-script ' >/dev/null; then
+  - if cargo install --list | grep '^rust-script ' >/dev/null; then
       true;
     else
-      cargo install cargo-script;
+      cargo install rust-script;
     fi
   - if [ "$EMACS" = "emacs23" ]; then
       curl 'http://orgmode.org/org-8.2.5h.tar.gz' \

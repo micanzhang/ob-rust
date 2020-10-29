@@ -47,7 +47,7 @@
 ;; - You must have rust and cargo installed and the rust and cargo should be in your `exec-path'
 ;;   rust command.
 ;;
-;; - cargo-script
+;; - rust-script
 ;;
 ;; - `rust-mode' is also recommended for syntax highlighting and
 ;;   formatting.  Not this particularly needs it, it just assumes you
@@ -81,7 +81,7 @@ This function is called by `org-babel-execute-src-block'."
     (with-temp-file tmp-src-file (insert wrapped-body))
     (let ((results
      (org-babel-eval
-      (format "cargo script %s" tmp-src-file)
+      (format "rust-script %s" tmp-src-file)
             "")))
       (when results
         (org-babel-reassemble-table
