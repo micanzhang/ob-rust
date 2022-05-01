@@ -73,15 +73,15 @@ This function is called by `org-babel-execute-src-block'."
   (message "executing Rust source code block")
   (let* ((tmp-src-file (org-babel-temp-file "rust-src-" ".rs"))
          (processed-params (org-babel-process-params params))
-         (_flags (cdr (assoc :flags processed-params)))
-         (_args (cdr (assoc :args processed-params)))
+         (_flags (alist-get :flags processed-params ""))
+         (_args (alist-get :args processed-params ""))
          (coding-system-for-read 'utf-8) ;; use utf-8 with subprocesses
          (coding-system-for-write 'utf-8)
          (wrapped-body (if (string-match-p "fn main()" body) body (concat "fn main() {\n" body "\n}"))))
     (with-temp-file tmp-src-file (insert wrapped-body))
     (let ((results
      (org-babel-eval
-      (format "rust-script %s" tmp-src-file)
+      (format "rust-script %s -- %s %s" _flags tmp-src-file _args)
             "")))
       (when results
         (org-babel-reassemble-table
